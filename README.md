@@ -15,6 +15,8 @@ A First Level Header
 >
 > [sqlite.dll](https://www.sqlite.org/sqlite-dll-win32-x86-3071502.zip)
 
+# GCC
+> Can't compile 32 bit code with 64 bit compiler [GCC docs](http://gcc.gnu.org/onlinedocs/gcc/_005f_005fint128.html)
 
 <!--
 	http://www.transmissionzero.co.uk/computing/building-dlls-with-mingw/

@@ -1,10 +1,13 @@
-PRODUCT_VERSION = 0.5.3
+SHELL = C:/Windows/System32/cmd.exe
+
+PRODUCT_VERSION = 0.5.5
 
 CC = g++
+# CC = C:\mingw64\bin\g++
 
-SOURCES = date.cpp dir.cpp math.cpp time.cpp util.cpp util/base64.cpp util/file.cpp util/string.cpp
+SOURCES = dir.cpp math.cpp util/base64.cpp
 # OBJECTS = $(SOURCES:.cpp=.o)
-OBJECTS = date.o dir.o math.o time.o util.o base64.o file.o string.o
+OBJECTS = dir.o math.o base64.o
 
 #   "-s" switch is used to strip symbols from the DLL
 #	"-O3" if you really know what you're doing
@@ -16,39 +19,64 @@ FLAGS = -Wall -Wextra -std=c++0x -O1 -O2 -s
 static:
 	$(CC) -c $(SOURCES) $(FLAGS)
 	ar rcs libmmx.a $(OBJECTS)
-	
+
 shared:
 #   -lpthread needed for <thread> on linux
 	$(CC) -c -fPIC $(SOURCES) $(FLAGS) -lpthread
 	$(CC) -shared -Wl,-soname,libmmx.so -o libmmx.so $(OBJECTS) $(FLAGS) -lpthread
 
+# ld.exe: i386 architecture of input file `VERSIONINFO.o' is incompatible with i386:x86-64 output
 dll:
-	windres VERSIONINFO.rc VERSIONINFO.o
-	$(CC) -shared -D MMX_DYNAMIC $(SOURCES) VERSIONINFO.o -o mmx.dll $(FLAGS)
+#	windres VERSIONINFO.rc VERSIONINFO.o
+	$(CC) -shared -D MMX_DYNAMIC $(SOURCES) -o mmx.dll $(FLAGS)
 
 # 7-zip must be in %PATH%
 windows: static dll
-	windows.bat $(PRODUCT_VERSION)_win
+	mkdir bin
+	mv mmx.dll bin
+	cp ../bin/sqlite3.dll bin
+
+	mkdir lib
+	mv libmmx.a lib
+
+# The syntax of the command is incorrect.
+
+# mkdir include
+# mkdir include/mmx
+	mkdir include/mmx/util
+	mkdir include/mmx/ext
+	cp *.hpp include/mmx/
+	cp util/*.hpp include/mmx/util/
+
+	cp ../ext/* include/mmx/ext/
+	
+	7z a -r mmx-$(PRODUCT_VERSION).7z bin lib include ../makefile ../example.cpp
+	7z d mmx-$(PRODUCT_VERSION).7z src
+
+	rm -rf bin
+	rm -rf lib
+	rm -rf include
+	
+	rm *.o
 	
 linux: static shared
-	mkdir lib
+	mkdir -p lib
 	mv libmmx.a lib
 	mv libmmx.so lib
 	
-	mkdir include include/mmx include/mmx/util include/mmx/ext
+	mkdir -p include include/mmx include/mmx/util include/mmx/ext
 	cp *.hpp include/mmx
 	cp util/*.hpp include/mmx/util
 	cp ../ext/* include/mmx/ext
 	
-	tar -cjf mmx-$(PRODUCT_VERSION)_nix.tar.bz2 lib/ include/ ../makefile ../example.cpp
+	tar -cjf mmx-$(PRODUCT_VERSION).tar.bz2 lib/ include/ ../makefile ../example.cpp
 	
-	rm -f lib/*
-	rmdir lib
-	rm -f include/mmx/ext/*
-	rmdir include/mmx/ext
-	rm -f include/mmx/util/*
-	rmdir include/mmx/util
-	rm -f include/mmx/*
-	rmdir include/mmx include
-	
+	rm -rf lib
+	rm -rf include
+	rm *.o
+
+clean:
+	rm -rf bin
+	rm -rf lib
+	rm -rf include
 	rm *.o

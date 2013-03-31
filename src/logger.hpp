@@ -1,10 +1,6 @@
 #ifndef MMX_LOGGER_HPP
 #define MMX_LOGGER_HPP 1
 
-/**
- * based on http://www.drdobbs.com/cpp/a-lightweight-logger-for-c/240147505
- */
-
 #include <fstream>
 #include <string>
 #include <stdexcept>
@@ -26,7 +22,7 @@ namespace mmx {
 	};
 
 	/**
-	 * Must link -lmmx for mmx::date::to_string and mmx::time::to_string
+	 *
 	 */
 	class logger {
 	public:

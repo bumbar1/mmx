@@ -15,8 +15,22 @@ namespace mmx {
 	/**
 	 *
 	 */
-	MMX_API std::vector<std::string> split(const std::string& str, const char sep=' ');
-	
+	std::vector<std::string> split(const std::string& str, const char sep=' ') {
+		std::vector<std::string> list;
+		size_t a = !std::string::npos;
+		size_t b = 0;
+
+		while (a != std::string::npos) {
+			a = str.find(sep, b);
+			std::string s(str.substr(b, a - b));
+			if (!s.empty())
+				list.push_back(s);
+			b = a + 1;
+		}
+
+		return list;
+	}
+
 	/**
 	 * http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 	 */
@@ -44,9 +58,24 @@ namespace mmx {
 	 * http://www.parashift.com/c++-faq-lite/templates.html#faq-35.8
 	 */
 	template <class T>
-	inline std::string to_string(const T& x) {
+	inline typename std::enable_if<
+		std::is_integral<T>::value, std::string
+	>::type to_string(const T& x) {
 		std::ostringstream out;
 		out << x;
+		return out.str();
+	}
+
+	/**
+	 * http://www.parashift.com/c++-faq-lite/templates.html#faq-35.8
+	 */
+	template <class T>
+	inline typename std::enable_if<
+		std::is_floating_point<T>::value, std::string
+	>::type to_string(const T& x) {
+		const int sigdigits = std::numeric_limits<T>::digits10;
+		std::ostringstream out;
+		out << std::setprecision(sigdigits) << x;
 		return out.str();
 	}
 
@@ -69,47 +98,26 @@ namespace mmx {
 	}
 
 	/**
-	 * http://www.parashift.com/c++-faq-lite/templates.html#faq-35.8
+	 *
 	 */
-	template <>
-	inline std::string to_string<double>(const double& x) {
-		const int sigdigits = std::numeric_limits<double>::digits10;
-		std::ostringstream out;
-		out << std::setprecision(sigdigits) << x;
-		return out.str();
-	}
-
-	/**
-	 * http://www.parashift.com/c++-faq-lite/templates.html#faq-35.8
-	 */
-	template <>
-	inline std::string to_string<float>(const float& x) {
-		const int sigdigits = std::numeric_limits<float>::digits10;
-		std::ostringstream out;
-		out << std::setprecision(sigdigits) << x;
-		return out.str();
-	}
-
-	/**
-	 * http://www.parashift.com/c++-faq-lite/templates.html#faq-35.8
-	 */
-	template <>
-	inline std::string to_string<long double>(const long double& x) {
-		const int sigdigits = std::numeric_limits<long double>::digits10;
-		std::ostringstream out;
-		out << std::setprecision(sigdigits) << x;
-		return out.str();
+	std::string to_lower(const std::string& str) {
+		std::string out(str);
+		std::transform(str.begin(), str.end(), out.begin(), [](char c){
+			return std::tolower(c);
+		});
+		return out;
 	}
 
 	/**
 	 *
 	 */
-	MMX_API std::string to_lower(const std::string& str);
-	
-	/**
-	 *
-	 */
-	MMX_API std::string to_upper(const std::string& str);
+	std::string to_upper(const std::string& str) {
+		std::string out(str);
+		std::transform(str.begin(), str.end(), out.begin(), [](char c){
+			return std::toupper(c);
+		});
+		return out;
+	}
 
 }         // ~namespace mmx
 

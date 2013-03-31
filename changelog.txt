@@ -92,3 +92,9 @@ version:	0.5.2
 
 version:	0.5.3
 SQLite wrapper (don't forget to link sqlite.dll)
+
+version:	0.5.4
+added list_tables to sqlite
+
+version:	0.5.5
+inlined date, time, util/file, util/string, util/endian functions

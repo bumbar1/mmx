@@ -41,9 +41,9 @@ namespace mmx {
 		 */
 		void open(const std::string& db, int mode) {
 			close();
-			
+
 			if (sqlite3_open_v2(db.c_str(), &_conn, mode, nullptr) != SQLITE_OK)
-				throw mmx::db_error(sqlite3_errmsg(_conn));
+				throw mmx::db_error(std::string("sqlite: ") + sqlite3_errmsg(_conn));
 			
 			if (_conn == nullptr)
 				throw mmx::db_error("unable to open: " + db);
@@ -100,20 +100,20 @@ namespace mmx {
 
 		/**
 		 * Container needs to support ranged based for (ie, begin(), end(), operators ++ (post, pre), * (dereference)
-		 *
-		 * template <class Container>
-		 * void query(const std::string& statement, Container& c) {
-		 *     sqlite::statement sql(_conn);
-		 *
-		 *     sql.prepare(statement);
-		 *
-		 *     begin_transaction();
-		 *
-		 *     for (const auto& el : c)
-		 *         sql << el;
-		 *     end_transaction();
-		 * }
 		 */
+		template <class Container>
+		void query(const std::string& statement, const Container& c) {
+			sqlite::statement sql(_conn);
+
+			sql.prepare(statement);
+
+			sql << "begin transaction;";
+
+			for (const auto& el : c)
+				sql << el;
+
+			sql << "end transaction;";
+		}
 
 		bool table_exists(const std::string& name) {
 			try {
@@ -122,13 +122,16 @@ namespace mmx {
 				// empty, no results
 				if (!r.size())
 					return false;
-				
 				return true;
 			} catch (mmx::db_error& e) {
 				return false;
 			}
 		}
 
+		std::vector<std::string> list_tables() {			
+			return query<std::string>("SELECT name FROM sqlite_master WHERE type='table'");
+		}
+		
 		class statement {
 		public:
 			MMX_CONSTEXPR statement(sqlite3* db) : _db(db), _stmt(nullptr), _column(0) {}
@@ -167,7 +170,7 @@ namespace mmx {
 
 			void prepare(const std::string& sql) {
 				int code = sqlite3_prepare_v2(_db, sql.c_str(), sql.size(), &_stmt, nullptr);
-				
+
 				if (code != SQLITE_OK)
 					throw mmx::db_error("error preparing statement (\"" + sql + "\"): " + sqlite3_errmsg(_db));
 			}

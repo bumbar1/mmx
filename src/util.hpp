@@ -8,6 +8,7 @@
 #include <type_traits>  // enable_if, is_integral
 
 #include "util/base64.hpp"
+#include "util/endian.hpp"
 #include "util/enumerate.hpp"
 #include "util/file.hpp"
 #include "util/parse.hpp"
@@ -38,17 +39,6 @@ namespace mmx {
 	>::type max(const T x, const T y) {
 		return x ^ ((x ^ y) & -(x < y));
 	}
-
-	MMX_API extern const bool endian_little;
-	MMX_API extern const bool endian_big;
-
-	/**
-	 * Checks endianess of the machine.
-	 *
-	 * big   : 0x12, 0x34, 0x56, 0x78
-	 * little: 0x78, 0x56, 0x34, 0x12
-	 */
-	MMX_API bool endian();
 
 	/**
 	 * http://www.dodgycoder.net/2012/02/coding-tricks-of-game-developers.html?m=1
