@@ -1,9 +1,19 @@
+# make.exe: Interrupt/Exception caught (code = 0xc0000005, addr = 0x0040b001)
 SHELL = C:/Windows/System32/cmd.exe
+
+.PHONY: clean
 
 PRODUCT_VERSION = 0.5.5
 
-CC = g++
-# CC = C:\mingw64\bin\g++
+CC_32 = g++
+CC_64 = g++64
+
+# default is 32 bit code, user can override
+# example: following will (try) to compile 64 bit code (g++ has to be named g++64)
+# make win SIZE=64
+SIZE = 32
+
+CC = $(CC_$(SIZE))
 
 SOURCES = dir.cpp math.cpp util/base64.cpp
 # OBJECTS = $(SOURCES:.cpp=.o)
@@ -31,7 +41,8 @@ dll:
 	$(CC) -shared -D MMX_DYNAMIC $(SOURCES) -o mmx.dll $(FLAGS)
 
 # 7-zip must be in %PATH%
-windows: static dll
+windows: win
+win: static dll
 	mkdir bin
 	mv mmx.dll bin
 	cp ../bin/sqlite3.dll bin
@@ -41,17 +52,14 @@ windows: static dll
 
 # The syntax of the command is incorrect.
 
-# mkdir include
-# mkdir include/mmx
-	mkdir include/mmx/util
-	mkdir include/mmx/ext
+	mkdir "include" "include/mmx" "include/mmx/util" "include/mmx/ext"
 	cp *.hpp include/mmx/
 	cp util/*.hpp include/mmx/util/
 
 	cp ../ext/* include/mmx/ext/
 	
-	7z a -r mmx-$(PRODUCT_VERSION).7z bin lib include ../makefile ../example.cpp
-	7z d mmx-$(PRODUCT_VERSION).7z src
+	7z a -r mmx-$(PRODUCT_VERSION)-win-$(SIZE).7z bin lib include ../makefile ../example.cpp
+	7z d mmx-$(PRODUCT_VERSION)-win-$(SIZE).7z src
 
 	rm -rf bin
 	rm -rf lib
