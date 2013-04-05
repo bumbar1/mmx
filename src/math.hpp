@@ -38,7 +38,6 @@ namespace mmx {
 	 */
 	MMX_CONSTEXPR long double fibonacci(uint n) {
 		#define sqrt5 static_cast<double>(2.2360679774997898)
-		//#define phi   static_cast<double>(1.6180339887498948)
 		return static_cast<long double>((std::pow(phi, n) - std::pow(1 - phi, n)) / sqrt5);
 	}
 

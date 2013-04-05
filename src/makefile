@@ -5,15 +5,12 @@ SHELL = C:/Windows/System32/cmd.exe
 
 PRODUCT_VERSION = 0.5.5
 
-CC_32 = g++
-CC_64 = g++64
+CC_NAME = g++
 
-# default is 32 bit code, user can override
-# example: following will (try) to compile 64 bit code (g++ has to be named g++64)
-# make win SIZE=64
-SIZE = 32
+# custom path for compiler (don't forget trailing slash!)
+CC_PATH = 
 
-CC = $(CC_$(SIZE))
+CC = $(CC_PATH)$(CC_NAME)
 
 SOURCES = dir.cpp math.cpp util/base64.cpp
 # OBJECTS = $(SOURCES:.cpp=.o)
@@ -51,6 +48,7 @@ win: static dll
 	mv libmmx.a lib
 
 # The syntax of the command is incorrect.
+# native window mkdir has different syntax than gnu make -- it's using / for switch
 
 	mkdir "include" "include/mmx" "include/mmx/util" "include/mmx/ext"
 	cp *.hpp include/mmx/
@@ -58,8 +56,8 @@ win: static dll
 
 	cp ../ext/* include/mmx/ext/
 	
-	7z a -r mmx-$(PRODUCT_VERSION)-win-$(SIZE).7z bin lib include ../makefile ../example.cpp
-	7z d mmx-$(PRODUCT_VERSION)-win-$(SIZE).7z src
+	7z a -r mmx-$(PRODUCT_VERSION)-win.7z bin lib include ../makefile ../example.cpp
+	7z d mmx-$(PRODUCT_VERSION)-win.7z src
 
 	rm -rf bin
 	rm -rf lib
@@ -77,7 +75,7 @@ linux: static shared
 	cp util/*.hpp include/mmx/util
 	cp ../ext/* include/mmx/ext
 	
-	tar -cjf mmx-$(PRODUCT_VERSION).tar.bz2 lib/ include/ ../makefile ../example.cpp
+	tar -cjf mmx-$(PRODUCT_VERSION)-nix.tar.bz2 lib/ include/ ../makefile ../example.cpp
 	
 	rm -rf lib
 	rm -rf include

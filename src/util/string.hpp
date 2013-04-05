@@ -82,8 +82,7 @@ namespace mmx {
 	/**
 	 *
 	 */
-	template <>
-	inline std::string to_string<std::string>(const std::string& str) {
+	inline std::string to_string(const std::string& str) {
 		return str;
 	}
 
