@@ -31,7 +31,7 @@ namespace mmx {
 	/**
 	 *
 	 */
-    MMX_API bool is_prime(uint n);
+	MMX_API bool is_prime(uint n);
 
 	/**
 	 * Uses Binet's formula. Returns n-th Fibonacci's number
