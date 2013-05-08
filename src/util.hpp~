@@ -7,13 +7,6 @@
 #include <iostream>     // print
 #include <type_traits>  // enable_if, is_integral
 
-/// <thread> not yet supported by MinGW
-#if !defined( MMX_IS_MINGW )
-	#include <future>
-	#include <thread>
-	#include <chrono>
-#endif
-
 #include "util/base64.hpp"
 #include "util/endian.hpp"
 #include "util/enumerate.hpp"
@@ -92,6 +85,7 @@ namespace mmx {
 
 	/// <thread> not yet supported by MinGW
 	#if !defined( MMX_IS_MINGW )
+	#include <future>
 	namespace __internal {
 
 		template <class F>

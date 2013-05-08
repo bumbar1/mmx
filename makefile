@@ -1,12 +1,10 @@
 CC = g++
-LIB = lib/
-BIN = bin/
-FLAGS = -Wall -Wextra -std=c++0x -s
+FLAGS = -Wall -Wextra -std=c++11 -s
 
 windows:
-	$(CC) $(FLAGS) -static example.cpp -L $(LIB) -lmmx -o static.exe
-	$(CC) $(FLAGS) example.cpp $(BIN)mmx.dll -o dynamic.exe
+	$(CC) $(FLAGS) -static example.cpp -lmmx -o static.exe
+	$(CC) $(FLAGS) example.cpp "build/bin/mmx.dll" -o dynamic.exe
 	
 linux:
-	$(CC) $(FLAGS) -static example.cpp -L $(LIB) -lmmx -o static.out
-	$(CC) $(FLAGS) example.cpp -o dynamic.out -L $(LIB) -lmmx
+	$(CC) $(FLAGS) -static example.cpp -lmmx -o static.out
+	$(CC) $(FLAGS) example.cpp -o dynamic.out -lmmx

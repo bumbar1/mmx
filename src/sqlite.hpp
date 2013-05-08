@@ -56,7 +56,7 @@ namespace mmx {
 		}
 
 		/**
-		 * T needs to overload operators << and >> as friends :P
+         * T needs to overload operators << and >> as friends
 		 * 
 		 * friend mmx::sqlite::statement& operator << (mmx::sqlite::statement& db, const T& m) {
          *   db << m.field0 << m.field1 << m.field2;
@@ -115,7 +115,7 @@ namespace mmx {
 			sql << "end transaction;";
 		}
 
-		bool table_exists(const std::string& name) {
+        bool table_exists(const std::string& name) {
 			try {
 				auto r = query<std::string>("SELECT name FROM sqlite_master WHERE type='table' AND name='" + name + "'");
 				
@@ -128,7 +128,7 @@ namespace mmx {
 			}
 		}
 
-		std::vector<std::string> list_tables() {			
+        std::vector<std::string> list_tables() {
 			return query<std::string>("SELECT name FROM sqlite_master WHERE type='table'");
 		}
 		

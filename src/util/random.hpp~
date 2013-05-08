@@ -56,7 +56,7 @@ namespace mmx {
 	template <class InputIterator>
 	typename std::iterator_traits<InputIterator>::value_type
 	choice(InputIterator first, InputIterator last) {
-		return *(first + ranged_rand(long(0), last - first - 1));
+		return *(first + ranged_rand(int(0), int(last - first - 1)));
 	}
 
 	/**

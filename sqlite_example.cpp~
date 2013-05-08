@@ -29,7 +29,7 @@ int main() {
 	try {
 		mmx::sqlite db;
 
-		db.open("test.sqlite3", SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE);
+		db.open(":memory:", SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE);
 
 		db.query("create table test(id int, c0 int, c1 int);");
 

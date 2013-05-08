@@ -59,7 +59,7 @@ int main() {
 
 	std::cout << std::endl;
 
-	std::cout << "choice: " << mmx::choice("one", "two", "three", "four", "five") << std::endl;
+	//std::cout << "choice: " << mmx::choice("one", "two", "three", "four", "five") << std::endl;
 
 	std::vector<std::string> v {
 		"zero", "one", "two", "three", "four", "five"

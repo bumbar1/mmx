@@ -23,7 +23,7 @@ static:
 shared:
 #   -lpthread needed for <thread> on linux
 	$(CC) -c -fPIC $(SOURCES) $(FLAGS) -lpthread
-	$(CC) -shared -Wl,-soname,libmmx.so -o libmmx.so $(OBJECTS) $(FLAGS) -lpthread
+	$(CC) -shared -Wl,-soname,libmmx.so.0.5.5 -o libmmx.so $(OBJECTS) $(FLAGS) -lpthread
 
 # ld.exe: i386 architecture of input file `VERSIONINFO.o' is incompatible with i386:x86-64 output
 dll:
