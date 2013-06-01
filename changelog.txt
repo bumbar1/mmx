@@ -1,0 +1,100 @@
+Changelog
+
+version:    0.1.0
+dir class
+
+version:    0.1.1
+fixed gcd and lcm
+
+version:    0.1.2
+endian check
+ranged_rand [min, max]
+
+version:	0.2.0
+timer class (hi resolution timer)
+
+version:	0.2.1
+split function
+is_prime function
+
+version:	0.2.2
+basic math functions added
+
+verson: 	0.2.3
+to_string functions
+is_equal functions for float and double
+
+version: 	0.3.0
+vector2 class
+
+version: 	0.3.1
+no branch abs, http://www.dodgycoder.net/2012/02/coding-tricks-of-game-developers.html?m=1 (post 20)
+min, max bit hacks http://graphics.stanford.edu/~seander/bithacks.html
+
+version: 	0.3.2
+range function, http://yapb-soc.blogspot.com/2012/09/range-based-for-loop-on-int-range.html
+
+version:	0.3.3
+base 64 encode/decode
+
+version:	0.3.4
+recoded timer, now using <chrono> clock
+
+version:	0.3.5.1
+ranged_rand now using std::uniform_int_distribution
+
+version:	0.3.5.2
+minor fixes
+clamp function
+
+version:	0.4.0
+socket (todo: ipv6 support)
+
+version:	0.4.1
+non/blocking socket
+dir, socket no longer copyable
+
+version:	0.4.2
+restructured util functions (divided into seperate header for lightweight inclusion)
+
+version:	0.4.2.1
+fixed building/linking issues with util (dir)
+
+version:	0.4.3
+util/random module
+
+version:	0.4.3.1
+removed DLL macro from templated functions, since they needn't be exported
+
+version:	0.4.4
+added ranged_rand for floats
+
+version:	0.4.5
+dice_roll and coin_flip added to util/random
+
+version:	0.4.5.1
+added macro for MinGW, since std::random_device isn't working
+
+version:	0.4.6
+logger added
+
+version:	0.5.0
+adding support for MSVC (2010 and up)
+sockets dropped
+timer is header only
+
+version:	0.5.1
+util/file header (moved is_file, is_dir, is_ext from util header)
+abspath added to util/file (windows only at the moment)
+
+version:	0.5.2
+(Python like) enumerate
+
+version:	0.5.3
+SQLite wrapper (don't forget to link sqlite.dll)
+
+version:	0.5.4
+added list_tables to sqlite
+
+version:	0.5.5
+inlined date, time, util/file, util/string, util/endian functions
