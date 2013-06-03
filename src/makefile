@@ -33,7 +33,8 @@ dll:
 windows: static dll
 # The syntax of the command is incorrect.
 # native window mkdir has different syntax than gnu make -- it's using / for switch
-	mkdir "../build" "../build/lib" "../build/bin" "../build/include/mmx/util" "../build/include/mmx/ext"
+	-mkdir "../build" "../build/lib" "../build/bin" "../build/include"
+	-mkdir "../build/include/mmx" "../build/include/mmx/util" "../build/include/mmx/ext"
 
 	mv libmmx.a ../build/lib
 	
@@ -41,8 +42,9 @@ windows: static dll
 	cp util/*.hpp "../build/include/mmx/util"
 	cp ../ext/* "../build/include/mmx/ext"
 
-	mv mmx.dll "../bin"
-	cp "../bin/sqlite3.dll" "../build/bin"
+	mv mmx.dll "../build/bin"
+# To ignore errors in a recipe line, write a ‘-’ at the beginning of the line's text (after the initial tab).
+	-cp "../bin/sqlite3.dll" "../build/bin"
 	
 linux: static shared
 	mkdir -p ../build ../build/lib ../build/include/mmx/util ../build/include/mmx/ext
@@ -55,9 +57,9 @@ linux: static shared
 	cp ../ext/* ../build/include/mmx/ext
 
 install:
-	cp ../build/lib/* /usr/lib/
-	cp -R ../build/include/* /usr/include/
+	-cp ../build/lib/* /usr/lib/
+	-cp -R ../build/include/* /usr/include/
 	
 clean:
-	rm -rf ../build
-	rm *.o
+	-rm -rf ../build
+	-rm *.o
