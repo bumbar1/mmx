@@ -4,7 +4,9 @@
 ### Examples
 
 > `map(print<int, ','>, mmx::range(10));`
+>
 > `print(mmx::base64_encode(6, 79, 4, 0, 0));`
+>
 > `print(mmx::choice("one", "two", "three", "four"));`
 
 ### Visual C++11 support

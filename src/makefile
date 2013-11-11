@@ -1,5 +1,5 @@
 # make.exe: Interrupt/Exception caught (code = 0xc0000005, addr = 0x0040b001)
-# SHELL = C:/Windows/System32/cmd.exe
+SHELL = C:/Windows/System32/cmd.exe
 
 .PHONY: clean
 
