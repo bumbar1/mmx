@@ -110,22 +110,22 @@ namespace mmx {
 	/// set_timeout(1000, []{ MessageBox(NULL, L"Showing after 1000 ms", L"Caption", 0); });
 	#endif
 
+	/**
+	 *
+	 */
+	template <class F, class S>
+	void map(F&& f, S&& s) {
+		std::for_each(std::begin(std::forward<S>(s)), std::end(std::forward<S>(s)), std::forward<F>(f));
+	}
+
+	/**
+	 *
+	 */
+	template <class T, char sep='\n'>
+	void print(const T x) {
+		std::cout << mmx::to_string(x) << sep;
+	}
+	
 }           // ~namespace mmx
-
-/**
- *
- */
-template <class F, class S>
-void map(F&& f, S&& s) {
-	std::for_each(std::begin(std::forward<S>(s)), std::end(std::forward<S>(s)), std::forward<F>(f));
-}
-
-/**
- *
- */
-template <class T, char sep='\n'>
-void print(const T x) {
-	std::cout << mmx::to_string(x) << sep;
-}
 
 #endif      // MMX_UTIL_HPP
