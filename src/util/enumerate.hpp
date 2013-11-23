@@ -1,6 +1,8 @@
 #ifndef MMX_UTIL_ENUMERATE_HPP
 #define MMX_UTIL_ENUMERATE_HPP 1
 
+#include "../config.hpp"
+
 #include <iterator>
 
 namespace mmx {
@@ -12,7 +14,8 @@ namespace mmx {
 	struct enumerated_pair {
 		typedef T value_type;
 		
-		constexpr enumerated_pair(std::size_t i, value_type v) : index(i), value(v) {}
+		MMX_CONSTEXPR enumerated_pair(std::size_t i, value_type v) : index(i), value(v) {}
+		MMX_CONSTEXPR enumerated_pair(const enumerated_pair& copy) : index(copy.index), value(copy.value) {}
 
 		std::size_t  index;
 		value_type   value;
