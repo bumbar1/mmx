@@ -12,6 +12,7 @@ namespace mmx {
 		MMX_CONSTEXPR timer()
 			: _start()
 			, _end()
+			, _pause()
 		{
 		}
 
@@ -27,8 +28,8 @@ namespace mmx {
 		ulonglong nano() const { return std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start).count(); }
 		ulonglong ns() const { return std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start).count(); }
 
-		//void pause();
-		//void resume();
+		void pause() { _pause = std::chrono::high_resolution_clock::now(); }
+		void resume() { _start += (_pause - _start).count(); }
 		//void pause_for();
 
 		void start() { _start = std::chrono::high_resolution_clock::now(); }
@@ -40,6 +41,7 @@ namespace mmx {
 	private:
 		std::chrono::high_resolution_clock::time_point _start;
 		std::chrono::high_resolution_clock::time_point _end;
+		std::chrono::high_resolution_clock::time_point _pause;
 	};
 
 }           // ~namespace mmx
