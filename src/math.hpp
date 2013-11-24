@@ -8,9 +8,9 @@
 namespace mmx {
 
 	/// Mathematical constants to 16 decimal places.
-	MMX_CONSTEXPR double pi  = 3.1415926535897932;
-	MMX_CONSTEXPR double e   = 2.7182818284590452;
-	MMX_CONSTEXPR double phi = 1.6180339887498948;
+	const double pi  = 3.1415926535897932;
+	const double e   = 2.7182818284590452;
+	const double phi = 1.6180339887498948;
 
 	/**
 	 *
