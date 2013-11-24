@@ -32,13 +32,12 @@ namespace mmx {
 		sqlite& operator = (const sqlite& copy) MMX_CLASS_DELETE;
 
 		~sqlite() { close(); }
-		
-		/**
-		 * valid modes:
-		 * SQLITE_OPEN_READONLY
-		 * SQLITE_OPEN_READWRITE
-		 * SQLITE_OPEN_CREATE 
-		 */
+
+		// modes for open method
+		static const int read   = SQLITE_OPEN_READONLY;
+		static const int write  = SQLITE_OPEN_READWRITE;
+		static const int create = SQLITE_OPEN_CREATE;
+
 		void open(const std::string& db, int mode) {
 			close();
 
