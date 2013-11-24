@@ -27,7 +27,7 @@ namespace mmx {
 	#if !defined( MMX_IS_MSVC )
 		void                     seek(unsigned long location);
 	#endif
-		void                     read(std::vector<std::string>&& files);
+		void                     read(std::vector<std::string>& files);
 		std::vector<std::string> read();
 		std::string              path() const;
 	#if !defined( MMX_IS_MSVC )

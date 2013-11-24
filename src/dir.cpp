@@ -55,7 +55,7 @@ namespace mmx {
 	}
 #endif
 
-	void dir::read(std::vector<std::string>&& files) {
+	void dir::read(std::vector<std::string>& files) {
 		while ((_pdir = ::readdir(_dir)))
 			files.push_back(_pdir->d_name);
 	}
