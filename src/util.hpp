@@ -6,13 +6,9 @@
 #include <algorithm>    // map
 #include <iostream>     // print
 #include <type_traits>  // enable_if, is_integral
-
-/// <thread> not yet supported by MinGW
-#if !defined( MMX_IS_MINGW )
-	#include <future>
-	#include <thread>
-	#include <chrono>
-#endif
+#include <future>
+#include <thread>
+#include <chrono>
 
 #include "util/base64.hpp"
 #include "util/endian.hpp"
@@ -90,10 +86,7 @@ namespace mmx {
 		return std::abs(x - y) <= epsilon * std::abs(x);
 	}
 
-	/// <thread> not yet supported by MinGW
-	#if !defined( MMX_IS_MINGW )
-	namespace __internal {
-
+	namespace {
 		template <class F>
 		void timeout_callback(unsigned msec, F& f) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(msec));
@@ -104,11 +97,10 @@ namespace mmx {
 
 	template <class F>
 	void set_timeout(unsigned msec, F&& f) {
-		return std::async(std::bind(__internal::timeout_callback<F>, msec, std::forward<F>(f))).get();
+		return std::async(std::bind(timeout_callback<F>, msec, std::forward<F>(f))).get();
 	}
 
 	/// set_timeout(1000, []{ MessageBox(NULL, L"Showing after 1000 ms", L"Caption", 0); });
-	#endif
 
 	/**
 	 *
