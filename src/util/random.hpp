@@ -88,8 +88,22 @@ namespace mmx {
 	/**
 	 *
 	 */
+	bool flip_coin() {
+		return coin_flip();
+	}
+
+	/**
+	 *
+	 */
 	uint dice_roll(uint side=6) {
 		return ranged_rand<uint>(1, side);
+	}
+
+	/**
+	 *
+	 */
+	uint roll_dice(uint side=6) {
+		return dice_roll);
 	}
 
 }        // ~namespace mmx
