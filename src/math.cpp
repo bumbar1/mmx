@@ -8,7 +8,7 @@ namespace mmx {
 		if (n < 2)
 			return false;
 
-		int sn = int(std::sqrt(n)) + 1;
+		int sn = static_cast<int>(std::sqrt(n)) + 1;
 
 		for (int i = 2; i < sn; ++i)
 			if ((n % i) * n == 0)
