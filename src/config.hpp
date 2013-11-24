@@ -15,8 +15,8 @@
 			#define MMX_CLASS_DELETE
 			#define MMX_CLASS_DEFAULT
 			#define MMX_IS_MSVC          1
-		// Windows and not Visual Studio (assume MinGW); todo: fix assumption
-		#else
+		// MinGW
+		#elif defined( __MINGW32__ ) || defined( __MINGW64__ )
 			#define MMX_CONSTEXPR        constexpr
 			#define MMX_CLASS_DELETE     = delete
 			#define MMX_CLASS_DEFAULT    = default
@@ -44,18 +44,21 @@
 			#define MMX_CONSTEXPR
 			#define MMX_CLASS_DELETE
 			#define MMX_CLASS_DEFAULT
-			#define MMX_IS_MSVC  1
-		#else
+			#define MMX_IS_MSVC          1
+		#elif defined( __MINGW32__ ) || defined( __MINGW64__ )
 			#define MMX_CONSTEXPR        constexpr
 			#define MMX_CLASS_DELETE     = delete
 			#define MMX_CLASS_DEFAULT    = default
-			#define MMX_IS_MINGW 1
+			#define MMX_IS_MINGW         1
 		#endif
-	#elif defined( __GNUC__ )
-		#define MMX_CONSTEXPR        constexpr
-		#define MMX_CLASS_DELETE     = delete
-		#define MMX_CLASS_DEFAULT    = default
-		#define MMX_IS_GCC       1
+	#else
+		#if defined( __GNUC__ )
+			#define MMX_IS_GCC           1
+		#endif
+		
+		#define MMX_CONSTEXPR            constexpr
+		#define MMX_CLASS_DELETE         = delete
+		#define MMX_CLASS_DEFAULT        = default
 	#endif
 #endif
 

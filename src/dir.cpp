@@ -62,8 +62,7 @@ namespace mmx {
 
 	std::vector<std::string> dir::read() {
 		std::vector<std::string> files;
-		while ((_pdir = ::readdir(_dir)))
-			files.push_back(_pdir->d_name);
+		read(files);
 		return files;
 	}
 
