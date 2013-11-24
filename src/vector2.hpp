@@ -34,7 +34,7 @@ namespace mmx {
 		vector2 operator / (const vector2& v) const {
 			if (v.x == 0 || v.y == 0)
 				throw std::invalid_argument("vector2: almost divied by zero!");
-			return vector2(x / v.x, y / v.y);
+			return {x / v.x, y / v.y};
 		}
 
 		vector2& operator += (const vector2& v) {
