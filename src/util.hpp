@@ -86,21 +86,21 @@ namespace mmx {
 		return std::abs(x - y) <= epsilon * std::abs(x);
 	}
 
-	namespace {
+	namespace __internal {
 		template <class F>
 		void timeout_callback(unsigned msec, F& f) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 			f();
 		}
-
 	}		// ~namespace __internal
 
+	/**
+	 * set_timeout(1000, []{ MessageBox(NULL, L"Showing after 1000 ms", L"Caption", 0); });
+	 */
 	template <class F>
 	void set_timeout(unsigned msec, F&& f) {
-		return std::async(std::bind(timeout_callback<F>, msec, std::forward<F>(f))).get();
+		return std::async(std::bind(__internal::timeout_callback<F>, msec, std::forward<F>(f))).get();
 	}
-
-	/// set_timeout(1000, []{ MessageBox(NULL, L"Showing after 1000 ms", L"Caption", 0); });
 
 	/**
 	 *
