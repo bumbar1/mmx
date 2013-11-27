@@ -103,7 +103,7 @@ namespace mmx {
 	 *
 	 */
 	uint roll_dice(uint side=6) {
-		return dice_roll);
+		return dice_roll(side);
 	}
 
 }        // ~namespace mmx
