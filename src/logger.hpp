@@ -4,18 +4,15 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <mutex>
 
 #include "config.hpp"
 #include "date.hpp"
 #include "time.hpp"
 
-#if defined( MMX_IS_MSVC ) || defined( MMX_IS_GCC )
-	#include <mutex>
-#endif
-
 namespace mmx {
 
-	enum logging_policy {
+	enum class logging_policy {
 		DEBUG,
 		WARNING,
 		ERROR
@@ -78,9 +75,8 @@ namespace mmx {
 		std::string name() const { return _filename; }
 
 		void print(int policy, const std::string& src, int line, const std::string& msg) {
-		#if defined( MMX_IS_MSVC ) || defined( MMX_IS_GCC )
 			_mutex.lock();
-		#endif
+
 			std::ofstream file(_filename.c_str(), _mode);
 			
 			if (!file.is_open())
@@ -113,15 +109,11 @@ namespace mmx {
 			
 			file.flush();
 
-		#if defined( MMX_IS_MSVC ) || defined( MMX_IS_GCC )
 			_mutex.unlock();
-		#endif
 		}
 		
 	private:
-	#if defined( MMX_IS_MSVC ) || defined( MMX_IS_GCC )
 		std::mutex               _mutex;
-	#endif
 		std::string              _filename;
 		std::string              _format;
 		std::ios_base::openmode  _mode;
