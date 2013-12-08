@@ -5,9 +5,7 @@
 namespace mmx {
 
 	dir::dir()
-		: _dir(nullptr),
-		  _pdir(nullptr),
-		  _path(".")
+		: dir(".")
 	{
 	}
 
