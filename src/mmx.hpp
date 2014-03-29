@@ -18,3 +18,4 @@
 #include "vector3.hpp"
 
 #endif      // MMX_MMX_HPP
+

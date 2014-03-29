@@ -3,13 +3,13 @@
 
 #include "../config.hpp"
 
+#include <string>
+
 #if defined( MMX_IS_MSVC ) || defined( MMX_IS_MINGW )
 	#include <windows.h>
 #endif
 
 #include <sys/stat.h>
-
-#include <string>
 
 namespace mmx {
 
@@ -57,9 +57,10 @@ namespace mmx {
 	 */
 #if defined( MMX_IS_MSVC ) || defined( MMX_IS_MINGW )
 	std::string abspath(const std::string& relative) {
-		if (!is_file(relative))
+		if (!is_file(relative)) {
 			// return empty string, throw an exception?
 			return std::string("invalid file (" + relative + ")");
+		}
 
 		const int SIZE = 1024;
 		char buffer[SIZE]{};
@@ -73,3 +74,4 @@ namespace mmx {
 }         // ~namespace mmx
 
 #endif    // MMX_UTIL_FILE_HPP
+

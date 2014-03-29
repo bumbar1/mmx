@@ -3,9 +3,9 @@
 
 #include "config.hpp"
 
-#include <ostream>		// << operator
-#include <cmath>		// sin, cos, atan2
-#include <stdexcept>	// invalid_argument
+#include <ostream>          // << operator
+#include <cmath>            // sin, cos, atan2
+#include <stdexcept>        // invalid_argument
 
 namespace mmx {
 
@@ -33,8 +33,9 @@ namespace mmx {
 		MMX_CONSTEXPR vector3 operator * (const vector3& v) const { return {x * v.x, y * v.y, z * v.z}; }
 
 		vector3 operator / (const vector3& v) const {
-			if (v.x == 0 || v.y == 0 || v.z == 0)
+			if (v.x == 0 || v.y == 0 || v.z == 0) {
 				throw std::invalid_argument("vector3: almost divied by zero!");
+			}
 			return {x / v.x, y / v.y, z / v.z};
 		}
 
@@ -60,8 +61,9 @@ namespace mmx {
 		}
 
 		vector3& operator /= (const vector3& v) {
-			if (v.x == 0 || v.y == 0 || v.z == 0)
+			if (v.x == 0 || v.y == 0 || v.z == 0) {
 				throw std::invalid_argument("vector3: almost divied by zero!");
+			}
 			x /= v.x;
 			y /= v.y;
 			z /= v.z;
@@ -71,8 +73,9 @@ namespace mmx {
 		MMX_CONSTEXPR vector3 operator * (T scalar) const { return {x * scalar, y * scalar, z * scalar}; }
 
 		vector3 operator / (T scalar) const {
-			if (scalar == 0)
+			if (scalar == 0) {
 				throw std::invalid_argument("vector3: almost divied by zero!");
+			}
 			return {x / scalar, y / scalar, z / scalar};
 		}
 
@@ -84,8 +87,9 @@ namespace mmx {
 		}
 
 		vector3& operator /= (T scalar) const {
-			if (scalar == 0)
+			if (scalar == 0) {
 				throw std::invalid_argument("vector3: almost divided by zero!");
+			}
 			x /= scalar;
 			y /= scalar;
 			z /= scalar;
@@ -146,3 +150,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_VECTOR3_HPP
+

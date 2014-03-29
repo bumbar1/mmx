@@ -72,3 +72,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_DATE_HPP
+

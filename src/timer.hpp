@@ -28,8 +28,8 @@ namespace mmx {
 		ulonglong nano() const { return std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start).count(); }
 		ulonglong ns() const { return std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start).count(); }
 
-		void pause() { _pause = std::chrono::high_resolution_clock::now(); }
-		void resume() { _start += (_pause - _start).count(); }
+		//void pause() { _pause = std::chrono::high_resolution_clock::now(); }
+		//void resume() { _start += (_pause - _start).count(); }
 		//void pause_for();
 
 		void start() { _start = std::chrono::high_resolution_clock::now(); }
@@ -47,3 +47,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_TIMER_HPP
+

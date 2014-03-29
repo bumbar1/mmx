@@ -44,3 +44,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_DIR_HPP
+

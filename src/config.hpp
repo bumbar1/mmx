@@ -25,7 +25,7 @@
 	// not Windows
 	#else
 		#if defined( __GNUC__ )
-			#define MMX_IS_GCC           1
+			#define MMX_IS_GCC       1
 		#endif
 
 		#define MMX_API_EXPORT
@@ -63,7 +63,7 @@
 #endif
 
 #if defined( MMX_DYNAMIC )
-	#define MMX_API	   MMX_API_EXPORT
+	#define MMX_API    MMX_API_EXPORT
 #else
 	#define MMX_API    MMX_API_IMPORT
 #endif
@@ -73,3 +73,4 @@ typedef unsigned int       uint;
 typedef unsigned char      byte;
 
 #endif      // MMX_CONFIG_HPP
+

@@ -26,8 +26,9 @@ namespace mmx {
 		T n;
 		std::stringstream ss(str);
 		ss >> n;
-		if (ss.fail())
+		if (ss.fail()) {
 			throw parse_error("error parsing (with arg: " + str + ")");
+		}
 		return n;
 	}
 
@@ -42,3 +43,4 @@ namespace mmx {
 }         // ~namespace mmx
 
 #endif    // MMX_UTIL_PARSE_HPP
+

@@ -7,7 +7,7 @@ namespace mmx {
 
 	const bool endian_little = true;
 	const bool endian_big    = false;
-	
+
 	/**
 	 * Checks endianess of the machine.
 	 *
@@ -21,3 +21,4 @@ namespace mmx {
 }       // ~namespace mmx
 
 #endif	// MMX_UTIL_ENDIAN_HPP
+

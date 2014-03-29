@@ -4,7 +4,7 @@
 #include "../config.hpp"
 
 #include <random>
-#include <iterator>  // iterator_traits
+#include <iterator>            // iterator_traits
 #include <initializer_list>
 #include <type_traits>
 
@@ -109,3 +109,4 @@ namespace mmx {
 }        // ~namespace mmx
 
 #endif   // MMX_UTIL_RANDOM_HPP
+

@@ -46,3 +46,4 @@ namespace mmx {
 }         // ~namespace mmx
 
 #endif    // MMX_UTIL_BASE64_HPP
+

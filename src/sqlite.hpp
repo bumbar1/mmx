@@ -41,50 +41,50 @@ namespace mmx {
 		void open(const std::string& db, int mode) {
 			close();
 
-			if (sqlite3_open_v2(db.c_str(), &_conn, mode, nullptr) != SQLITE_OK)
+			if (sqlite3_open_v2(db.c_str(), &_conn, mode, nullptr) != SQLITE_OK) {
 				throw mmx::db_error(std::string("sqlite: ") + sqlite3_errmsg(_conn));
-			
-			if (_conn == nullptr)
+			}
+
+			if (_conn == nullptr) {
 				throw mmx::db_error("unable to open: " + db);
+			}
 		}
 
 		void close() {
-			if (_conn)
+			if (_conn) {
 				sqlite3_close_v2(_conn);
+			}
 			_conn = nullptr;
 		}
 
 		/**
-         * T needs to overload operators << and >> as friends
+		 * T needs to overload operators << and >> as friends
 		 * 
 		 * friend mmx::sqlite::statement& operator << (mmx::sqlite::statement& db, const T& m) {
-         *   db << m.field0 << m.field1 << m.field2;
+		 *   db << m.field0 << m.field1 << m.field2;
 		 *   return db;
 		 * }
 		 *
 		 * friend mmx::sqlite::statement& operator >> (mmx::sqlite::statement& db, T& m) {
-         *   db >> m.field0 >> m.field1 >> m.field2;
+		  *   db >> m.field0 >> m.field1 >> m.field2;
 		 *   return db;
 		 * }
 		 *
-		 */		
+		 */
 		template <class T>
 		std::vector<T> query(const std::string& statement) {
 			std::vector<T> results;
-			
 			sqlite::statement sql(_conn);
-			
+
 			sql.prepare(statement);
-			
+
 			while (sql.has_next()) {
 				T temp;
-				
-				sql >> temp;				
+
+				sql >> temp;
 				results.push_back(temp);
-				
 				sql.reset();
 			}
-			
 			return results;
 		}
 
@@ -93,7 +93,6 @@ namespace mmx {
 		 */
 		void query(const std::string& statement) {
 			sqlite::statement sql(_conn);
-			
 			sql.prepare(statement);
 		}
 
@@ -108,26 +107,28 @@ namespace mmx {
 
 			sql << "begin transaction;";
 
-			for (const auto& el : c)
+			for (const auto& el : c) {
 				sql << el;
+			}
 
 			sql << "end transaction;";
 		}
 
-        bool table_exists(const std::string& name) {
+		bool table_exists(const std::string& name) {
 			try {
 				auto r = query<std::string>("SELECT name FROM sqlite_master WHERE type='table' AND name='" + name + "'");
-				
+
 				// empty, no results
-				if (!r.size())
+				if (!r.size()) {
 					return false;
+				}
 				return true;
 			} catch (mmx::db_error& e) {
 				return false;
 			}
 		}
 
-        std::vector<std::string> list_tables() {
+		std::vector<std::string> list_tables() {
 			return query<std::string>("SELECT name FROM sqlite_master WHERE type='table'");
 		}
 		
@@ -170,8 +171,9 @@ namespace mmx {
 			void prepare(const std::string& sql) {
 				int code = sqlite3_prepare_v2(_db, sql.c_str(), sql.size(), &_stmt, nullptr);
 
-				if (code != SQLITE_OK)
+				if (code != SQLITE_OK) {
 					throw mmx::db_error("error preparing statement (\"" + sql + "\"): " + sqlite3_errmsg(_db));
+				}
 			}
 
 			void reset() { _column = 0; }
@@ -191,3 +193,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_SQLITE_HPP
+
