@@ -17,6 +17,8 @@ namespace mmx {
 		MMX_CONSTEXPR enumerated_pair(std::size_t i, value_type v) : index(i), value(v) {}
 		MMX_CONSTEXPR enumerated_pair(const enumerated_pair& copy) : index(copy.index), value(copy.value) {}
 
+		MMX_CONSTEXPR value_type operator* () { return value; }
+
 		std::size_t  index;
 		value_type   value;
 	};
