@@ -68,3 +68,4 @@ namespace mmx {
 }         // ~namespace mmx
 
 #endif    // MMX_UTIL_RANGE_HPP
+

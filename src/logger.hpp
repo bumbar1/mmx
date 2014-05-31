@@ -44,8 +44,9 @@ namespace mmx {
 		 * TODO: with (sub)strings? ie: %date, %time, %msg, %type
 		 */
 		void format(const std::string& fmt) {
-			if (fmt.empty())
+			if (fmt.empty()) {
 				throw std::invalid_argument("logger: no format specified");
+			}
 
 			const char* ptr = fmt.c_str();
 			while (*ptr++) {
@@ -79,11 +80,12 @@ namespace mmx {
 
 			std::ofstream file(_filename.c_str(), _mode);
 			
-			if (!file.is_open())
+			if (!file.is_open()) {
 				throw std::runtime_error("logger: unable to open '" + _filename + "'");
-			
+			}
+
 			const char* ptr = _format.c_str();
-			
+
 			while (*ptr++) {
 				if (*ptr == '%') {
 					switch (*(++ptr)) {
@@ -102,11 +104,12 @@ namespace mmx {
 						case 'F': case 'f': file << src; break;
 						default: ;
 					}
-				} else
+				} else {
 					file << *ptr;
+				}
 			}
 			file << std::endl;
-			
+
 			file.flush();
 
 			_mutex.unlock();
@@ -135,5 +138,6 @@ namespace mmx {
 	#define WLOG(...)
 	#define ELOG(...)
 #endif    // MMX_DEBUG
-	
+
 #endif    // MMX_LOGGER_HPP
+

@@ -3,7 +3,7 @@
 
 #include "config.hpp"
 
-#include <cmath>	// pow
+#include <cmath>          // pow
 
 namespace mmx {
 
@@ -72,3 +72,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_MATH_HPP
+

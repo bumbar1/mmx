@@ -3,9 +3,9 @@
 
 #include "config.hpp"
 
-#include <ostream>		// << operator
-#include <cmath>		// sin, cos, atan2
-#include <stdexcept>	// invalid_argument
+#include <ostream>          // << operator
+#include <cmath>            // sin, cos, atan2
+#include <stdexcept>        // invalid_argument
 
 namespace mmx {
 
@@ -56,8 +56,9 @@ namespace mmx {
 		}
 
 		vector2& operator /= (const vector2& v) {
-			if (v.x == 0 || v.y == 0)
+			if (v.x == 0 || v.y == 0) {
 				throw std::invalid_argument("vector2: almost divied by zero!");
+			}
 			x /= v.x;
 			y /= v.y;
 			return *this;
@@ -66,8 +67,9 @@ namespace mmx {
 		MMX_CONSTEXPR vector2 operator * (T scalar) const { return {x * scalar, y * scalar}; }
 
 		vector2 operator / (T scalar) const {
-			if (scalar == 0)
+			if (scalar == 0) {
 				throw std::invalid_argument("vector2: almost divied by zero!");
+			}
 			return {x / scalar, y / scalar};
 		}
 
@@ -78,8 +80,9 @@ namespace mmx {
 		}
 
 		vector2& operator /= (T scalar) const {
-			if (scalar == 0)
+			if (scalar == 0) {
 				throw std::invalid_argument("vector2: almost divided by zero!");
+			}
 			x /= scalar;
 			y /= scalar;
 			return *this;
@@ -134,3 +137,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_VECTOR2_HPP
+

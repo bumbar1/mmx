@@ -66,8 +66,9 @@ namespace mmx {
 	>::type bits_on(T n) {
 		size_t c = 0;      // c accumulates the total bits set in v
 
-		for (; n; c++)
+		for (; n; c++) {
 			n &= n - 1;    // clear the least significant bit set
+		}
 
 		return c;
 	}
@@ -92,7 +93,7 @@ namespace mmx {
 			std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 			f();
 		}
-	}		// ~namespace __internal
+	}         // ~namespace __internal
 
 	/**
 	 * set_timeout(1000, []{ MessageBox(NULL, L"Showing after 1000 ms", L"Caption", 0); });
@@ -121,3 +122,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_UTIL_HPP
+

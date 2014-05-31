@@ -10,9 +10,9 @@ namespace mmx {
 	}
 
 	dir::dir(const std::string& path)
-		: _dir(nullptr),
-		  _pdir(nullptr),
-		  _path(path)
+		: _dir(nullptr)
+		, _pdir(nullptr)
+		, _path(path)
 	{
 		open();
 	}
@@ -22,15 +22,17 @@ namespace mmx {
 	}
 
 	void dir::open() {
-		if (_path.empty())
+		if (_path.empty()) {
 			throw std::runtime_error("dir: no directory specified to open");
-			
+		}
+
 		close();
 
 		_dir = ::opendir(_path.c_str());
 
-		if (_dir == nullptr)
+		if (_dir == nullptr) {
 			throw std::runtime_error("dir: failed to open '" + _path + "'");
+		}
 	}
 
 	void dir::open(const std::string& path) {
@@ -39,8 +41,9 @@ namespace mmx {
 	}
 
 	void dir::close() {
-		if (_dir)
+		if (_dir) {
 			::closedir(_dir);
+		}
 	}
 
 	void dir::rewind() {
@@ -54,8 +57,9 @@ namespace mmx {
 #endif
 
 	void dir::read(std::vector<std::string>& files) {
-		while ((_pdir = ::readdir(_dir)))
+		while ((_pdir = ::readdir(_dir))) {
 			files.push_back(_pdir->d_name);
+		}
 	}
 
 	std::vector<std::string> dir::read() {
@@ -79,3 +83,4 @@ namespace mmx {
 	}
 
 }		// ~namespace mmx
+

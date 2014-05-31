@@ -56,3 +56,4 @@ namespace mmx {
 }           // ~namespace mmx
 
 #endif      // MMX_TIME_HPP
+

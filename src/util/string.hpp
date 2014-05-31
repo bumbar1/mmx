@@ -123,3 +123,4 @@ namespace mmx {
 }         // ~namespace mmx
 
 #endif    // MMX_UTIL_STRING_HPP
+
