@@ -31,7 +31,7 @@ namespace mmx {
 	/**
 	 *
 	 */
-	MMX_API bool is_prime(uint n) {
+	bool is_prime(uint n) {
 		if (n < 2) {
 			return false;
 		}
@@ -72,7 +72,7 @@ namespace mmx {
 	/**
 	 *
 	 */
-	MMX_API uint log2(ulonglong n) {
+	uint log2(ulonglong n) {
 		uint ret = -1;
 		while (n >>= 1) {
 			++ret;
