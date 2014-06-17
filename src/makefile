@@ -5,9 +5,9 @@ SHELL = C:/Windows/System32/cmd.exe
 
 CC = g++
 
-SOURCES = dir.cpp math.cpp util/base64.cpp
+SOURCES = util/base64.cpp
 # OBJECTS = $(SOURCES:.cpp=.o)
-OBJECTS = dir.o math.o base64.o
+OBJECTS = base64.o
 
 #   "-s" switch is used to strip symbols from the DLL
 #	"-O3" if you really know what you're doing
