@@ -31,7 +31,20 @@ namespace mmx {
 	/**
 	 *
 	 */
-	MMX_API bool is_prime(uint n);
+	MMX_API bool is_prime(uint n) {
+		if (n < 2) {
+			return false;
+		}
+
+		int sn = static_cast<int>(std::sqrt(n)) + 1;
+
+		for (int i = 2; i < sn; ++i) {
+			if ((n % i) * n == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Uses Binet's formula. Returns n-th Fibonacci's number
@@ -59,8 +72,14 @@ namespace mmx {
 	/**
 	 *
 	 */
-	MMX_API uint log2(ulonglong n);
-	
+	MMX_API uint log2(ulonglong n) {
+		uint ret = -1;
+		while (n >>= 1) {
+			++ret;
+		}
+		return ret;
+	}
+
 	/**
 	 *
 	 */
