@@ -12,10 +12,10 @@
 
 namespace mmx {
 
-	enum class logging_policy {
+    enum class logging_policy {
 		DEBUG,
 		WARNING,
-		ERROR
+        ERROR,
 	};
 
 	/**
@@ -75,7 +75,7 @@ namespace mmx {
 		void rename(const std::string& filename) { _filename = filename; }
 		std::string name() const { return _filename; }
 
-		void print(int policy, const std::string& src, int line, const std::string& msg) {
+        void print(logging_policy policy, const std::string& src, int line, const std::string& msg) {
 			_mutex.lock();
 
 			std::ofstream file(_filename.c_str(), _mode);

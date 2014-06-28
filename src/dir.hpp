@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 #include <dirent.h>
 
@@ -30,9 +31,9 @@ namespace mmx {
 		dir(dir&&) MMX_CLASS_DELETE;
 		dir&& operator = (dir&&) MMX_CLASS_DELETE;
 
-		virtual ~dir(
+        virtual ~dir() {
 			close();
-		);
+        };
 
 		void open() {
 			if (_path.empty()) {
@@ -70,7 +71,7 @@ namespace mmx {
 			}
 		}
 
-		std::vector<std::string> dir::read() {
+        std::vector<std::string> read() {
 			std::vector<std::string> files;
 			read(files);
 			return files;
