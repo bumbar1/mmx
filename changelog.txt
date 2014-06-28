@@ -98,3 +98,6 @@ added list_tables to sqlite
 
 version:	0.5.5
 inlined date, time, util/file, util/string, util/endian functions
+
+version:	0.5.6
+inline dir, math
