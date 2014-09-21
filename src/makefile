@@ -1,5 +1,5 @@
 # make.exe: Interrupt/Exception caught (code = 0xc0000005, addr = 0x0040b001)
-SHELL = C:/Windows/System32/cmd.exe
+#SHELL = C:/Windows/System32/cmd.exe
 
 .PHONY: clean
 
@@ -45,13 +45,12 @@ windows: static dll
 	mv mmx.dll "../build/bin"
 # To ignore errors in a recipe line, write a ‘-’ at the beginning of the line's text (after the initial tab).
 	-cp "../bin/sqlite3.dll" "../build/bin"
-	
+
 linux: static shared
 	mkdir -p ../build ../build/lib ../build/include/mmx/util ../build/include/mmx/ext
 
 	mv libmmx.a ../build/lib
 	mv libmmx.so ../build/lib
-	
 	cp *.hpp ../build/include/mmx
 	cp util/*.hpp ../build/include/mmx/util
 	cp ../ext/* ../build/include/mmx/ext
@@ -59,7 +58,8 @@ linux: static shared
 install:
 	-cp ../build/lib/* /usr/lib/
 	-cp -R ../build/include/* /usr/include/
-	
+
 clean:
 	-rm -rf ../build
 	-rm *.o
+
