@@ -15,19 +15,18 @@ namespace mmx {
 	/**
 	 *
 	 */
-	std::vector<std::string> split(const std::string& str, const char sep=' ') {
+	std::vector<std::string> split(const std::string& str, const char sep) {
 		std::vector<std::string> list;
-		size_t a = !std::string::npos;
+		size_t a = 0;
 		size_t b = 0;
-
-		while (a != std::string::npos) {
-			a = str.find(sep, b);
-			std::string s(str.substr(b, a - b));
-			if (!s.empty())
-				list.push_back(s);
-			b = a + 1;
+		while (true) {
+			a = str.find_first_not_of(sep, b);
+			b = str.find_first_of(sep, a);
+			if (a == std::string::npos && b == std::string::npos) {
+				break;
+			}
+			list.emplace_back(str.substr(a, b - a));
 		}
-
 		return list;
 	}
 
