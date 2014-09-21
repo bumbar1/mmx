@@ -18,13 +18,12 @@
 int main() {
 
 	mmx::timer timer;
-
 	timer.start();
-	
+
 	std::cout << "date: " << mmx::date::to_string() << std::endl;
 	std::cout << "time: " << mmx::time::to_string() << std::endl;
 
-	/*try {
+	try {
 		mmx::dir dir;
 
 		std::string path = "src";
@@ -38,24 +37,24 @@ int main() {
 
 		std::cout << "files in '" << dir.path() << "'" << std::endl;
 
-		for (auto& s : dir.read())
+		for (const auto& s : dir.read())
 			std::cout << '\t' << dir.path() << '/' << s << std::endl;
 
 	} catch (std::runtime_error& e) {
 		std::cout << "runtime error: " << e.what() << std::endl;
 	} catch (...) {
 		std::cout << "unhandled exception" << std::endl;
-	}*/
+	}
 
 	std::cout << std::endl;
 
 	for (auto& s : mmx::split("Quick brown fox jumped over lazy dog.", ' '))
 		std::cout << "[" << s << "], ";
-	
+
 	std::cout << std::endl;
 	std::cout << (mmx::endian() == mmx::endian_little ? "little" : "big") << " endian" << std::endl;
 
-	map(print<int, ','>, mmx::range(10));
+	mmx::map(mmx::print<int, ','>, mmx::range(10));
 
 	std::cout << std::endl;
 
@@ -64,7 +63,7 @@ int main() {
 	std::vector<std::string> v {
 		"zero", "one", "two", "three", "four", "five"
 	};
-	
+
 	for (const auto& e : mmx::enumerate(v))
 		std::cout << e.index << ": " << e.value << "\n";
 
