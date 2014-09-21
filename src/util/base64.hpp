@@ -8,11 +8,6 @@
 
 namespace mmx {
 
-	/// internal, not to be exported
-	namespace __internal {
-		static const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-	}
-
 	/**
 	 *
 	 */
@@ -24,9 +19,7 @@ namespace mmx {
 	template <class T>
 	std::string base64_encode(std::initializer_list<T> list) {
 		std::string s(list.size(), 0);
-
 		std::copy(std::begin(list), std::end(list), std::begin(s));
-
 		return base64_encode(s);
 	}
 

@@ -4,6 +4,8 @@
 
 namespace mmx {
 
+	static const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
 	std::string base64_encode(const std::string& in) {
 		int count = 0;
 		int index = 0;
@@ -26,7 +28,7 @@ namespace mmx {
 				arr4[3] = (arr3[2] & 0x3F);
 
 				for (int i = 0; i < 4; ++i) {
-					encoded[index++] = __internal::base64_chars[arr4[i]];
+					encoded[index++] = base64_chars[arr4[i]];
 				}
 
 				count = 0;
@@ -43,7 +45,7 @@ namespace mmx {
 			arr4[3] = (arr3[2] & 0x3F);
 
 			for (int i = 0; i < count + 1; ++i) {
-				encoded[index++] = __internal::base64_chars[arr4[i]];
+				encoded[index++] = base64_chars[arr4[i]];
 			}
 
 			while (count++ < 3) {
@@ -70,7 +72,7 @@ namespace mmx {
 
 			if (i == 4) {
 				for (int k = 0; k < 4; ++k) {
-					arr4[k] = __internal::base64_chars.find(arr4[k]);
+					arr4[k] = base64_chars.find(arr4[k]);
 				}
 
 				arr3[0] = (arr4[0] << 2) + ((arr4[1] & 0x30) >> 4);
@@ -90,7 +92,7 @@ namespace mmx {
 			}
 
 			for (int k = 0; k < 4; ++k) {
-				arr4[k] = __internal::base64_chars.find(arr4[k]);
+				arr4[k] = base64_chars.find(arr4[k]);
 			}
 
 			arr3[0] = (arr4[0] << 2) + ((arr4[1] & 0x30) >> 4);
